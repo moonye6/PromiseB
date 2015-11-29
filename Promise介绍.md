@@ -22,7 +22,9 @@ Promise 对象是一个返回值的代理，这个返回值在promise对象创�
 这里只有两个动画，如果有更多呢，就会看到一堆函数缩进
 
 ### 一种写法
-> 浏览器实现方式 可以在支持Promise的版本上运行
+
+ 浏览器实现方式 可以在支持Promise的版本上运行
+ 
 ```
 var p = new Promise(function(resolve, reject){
   setTimeout(function(){
@@ -39,9 +41,10 @@ p.then(function(){
   },300);
 });
 ```
+
 ### 另一种写法（jQuery版本）
 
->jQuery版本的实现
+jQuery版本的实现
 
 ```
 var deferred = $.Deferred();
@@ -61,6 +64,7 @@ deferred.done(function() {
 好像从代码上来看，是多了几行的样子，但是能用这种串行的方式来写，感觉一定很爽吧
 
 ### Promise中的概念
+
 Promise中有几个状态：
 + pending: 初始状态, 非 fulfilled 或 rejected.
 + fulfilled: 成功的操作.
@@ -68,10 +72,9 @@ Promise中有几个状态：
 
 这里从pending状态可以切换到fulfill状态（jQuery中是resolve状态），也可以从pengding切换到reject状态，这个状态切换不可逆，且fulfilled和reject两个状态之间是不能互相切换的。
 
-[配图]
-
 
 ### 一个简单版本的实现
+
 ```
 /**
  * simple promise 
@@ -94,14 +97,12 @@ PromiseB.prototype.STATUS = {
     REJECT: 3 //拒绝状态
 };
 
-
 PromiseB.prototype._isFunction = function(f) {
     return Object.prototype.toString.call(f) === '[object Function]';
 };
 
 PromiseB.prototype._exec = function(callback, arg) {
     var newcallback;
-
 
     if (this._isFunction(callback)) {
         if (callback instanceof PromiseB) {
@@ -131,7 +132,6 @@ PromiseB.prototype._execFun = function(fun) {
     } else {
         this.resolve(fun);
     }
-
 
 };
 
@@ -207,10 +207,10 @@ PromiseB.prototype.always = function(fun) {
     return this;
 };
 
-
 ```
 
 ### 总结
+
 + promise会让代码变得更容易维护，像写同步代码一样写异步代码
 + 了解promise的原理，写个简单的实现版本就好了
 + promise的实现方案有很多，可以看[这里](https://github.com/nodejs/node-v0.x-archive/wiki/modules#wiki-async-flow)
