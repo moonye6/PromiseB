@@ -1,0 +1,27 @@
+<!DOCTYPE>  
+<html >  
+  <head>  
+    <title> Promise </title>  
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+  </head>  
+   <!-- 用Promise跑同步方法也ok -->
+  <body>
+  <script src="../js/promiseB.js"></script> 
+  <script>
+    var p = new PromiseB(function(resolve, reject){
+     //A动画
+        console.log('A');
+        resolve(5);
+    });
+
+    p.then(function(a){
+      console.log(a);
+      setTimeout(function() {
+          //B动画
+          console.log('B');
+      },300);
+    });
+  </script>
+
+
+</html>

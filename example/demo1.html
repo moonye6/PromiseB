@@ -1,0 +1,32 @@
+<!DOCTYPE>  
+<html >  
+  <head>  
+    <title> Promise </title>  
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+  </head>  
+  <!-- 一个简单的demo 在一个异步函数执行完后执行另外一段脚本 -->
+  <!-- 这里将PromiseB改为Promise，就可以在支持Promise的浏览器上看到原生Promise的实现效果了 -->
+  <body>
+  <script src="../js/promiseB.js"></script> 
+  <script>
+    var p = new PromiseB(function(resolve, reject){
+      setTimeout(function(){
+        //A动画
+        console.log('A');
+        resolve(3);
+      },300);
+    });
+
+
+    p.then(function(a){
+      console.log(a);
+      setTimeout(function() {
+          //B动画
+          console.log('B');
+      },300);
+    });
+
+  </script>
+
+
+</html>

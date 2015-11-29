@@ -1,0 +1,44 @@
+<!DOCTYPE>  
+<html >  
+  <head>  
+    <title> Promise </title>  
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+  </head>  
+   <!-- 这个例子在MDN上有，使用自己的promiseB来实现相同效果 -->
+   <!-- https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise-->
+  <body>
+  <script src="../js/promiseB.js"></script> 
+  <script>
+
+  var promiseCount = 0;
+  function testPromise() {
+      var thisPromiseCount = ++promiseCount;
+
+        console.log(thisPromiseCount + ' 开始(同步代码开始)');
+
+      // 我们创建一个新的promise: 然后用'result'字符串解决这个promise (3秒后)
+      var p1 = new PromiseB(function (resolve, reject) {
+          // 解决函数带着解决（resolve）或拒绝（reject）promise的能力被执行
+          console.log(thisPromiseCount + ' Promise开始(异步代码开始)');
+          // 这只是个创建异步解决的示例
+          window.setTimeout(function () {
+              // 我们满足（fullfil）了这个promise!
+              resolve(thisPromiseCount);
+          }, Math.random() * 2000 + 1000);
+      });
+
+      // 定义当promise被满足时应做什么
+      p1.then(function (val) {
+          // 输出一段信息和一个值
+          console.log(val + ' Promise被满足了(异步代码结束)'); 
+      });
+
+      console.log(thisPromiseCount + ' 建立了Promise(同步代码结束)');
+  }
+  testPromise();
+  testPromise();
+  testPromise();
+
+  </script>
+
+</html>
